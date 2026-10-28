@@ -30,8 +30,6 @@ One file per key, named by row and key: `r3-f.3mf` is F. Row 0 is the Fn row.
 
 Each file has two parts: the cap and the legend. Give each its own filament. A printer with an MMU prints both in one job.
 
-Print backspace first. The stabilizer spacing on backspace, enter, left shift, and space is not measured on a K3 Ultra.
-
 ## Homing bump
 
 A drop of resin is smoother than a printed bump. Print a key without a bump, add a tiny drop of resin with a toothpick, and let it cure.
