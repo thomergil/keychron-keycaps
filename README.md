@@ -28,7 +28,7 @@ One file per key, named by row and key: `r3-f.3mf` is F. Row 0 is the Fn row.
 
 ## Printing
 
-Each file has two parts: the cap and the legend. Give each its own filament.
+Each file has two parts: the cap and the legend. Give each its own filament. A printer with an MMU prints both in one job.
 
 Print backspace first. The stabilizer spacing on backspace, enter, left shift, and space is not measured on a K3 Ultra.
 
