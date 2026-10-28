@@ -14,7 +14,8 @@
 
 /* [Part] */
 part = "cap";          // "cap" | "inlay" (legend fill) | "coupons" | "probe" (one legend line, flat)
-legend = "U";          // "" for blank; the lower line when legend2 is set
+legend = "U";          // "" for blank; "@win", "@up", "@down", "@left", "@right" for drawn symbols;
+                       // the lower line when legend2 is set
 legend2 = "";          // upper line: shifted symbol or Fn-row icon
 probe_line = 1;        // part="probe": 1 = legend, 2 = legend2
 homing = "none";        // "none" | "dot" | "groove"
@@ -164,10 +165,33 @@ module homing_bar(z0, z1) {
 }
 
 module legend_line(n) {
-    if (n == 1)
-        text(legend, size = legend_size, font = legend_font, halign = "center", valign = "center");
+    t = n == 1 ? legend : legend2;
+    size = n == 1 ? legend_size : legend2_size;
+    if (t == "@win")
+        win_logo(size);
+    else if (t == "@up" || t == "@down" || t == "@left" || t == "@right")
+        chevron(size, t == "@up" ? 0 : t == "@left" ? 90 : t == "@down" ? 180 : 270);
     else
-        text(legend2, size = legend2_size, font = legend2_font, halign = "center", valign = "center");
+        text(t, size = size, font = n == 1 ? legend_font : legend2_font, halign = "center", valign = "center");
+}
+
+// Arrow key: an open chevron of two straight strokes, pointing up when rotated by 0.
+module chevron(size, angle) {
+    w = size * 0.75;
+    stroke = size * 0.12;
+    rotate(angle) for (x = [-1, 1])
+        hull() {
+            translate([x * w / 2, -w / 4]) circle(d = stroke, $fn = 16);
+            translate([0, w / 4]) circle(d = stroke, $fn = 16);
+        }
+}
+
+// Windows key: four squares, `size` wide.
+module win_logo(size) {
+    gap = size / 10;
+    for (x = [-1, 1], y = [-1, 1])
+        translate([x * (size + gap) / 4, y * (size + gap) / 4])
+            offset(r = gap / 2) square((size - gap) / 2 - gap, center = true);
 }
 
 // Both legend lines in plan, centered on the top face.

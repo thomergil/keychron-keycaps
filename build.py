@@ -34,7 +34,7 @@ def render(part, defs, out):
 
 
 def font_for(s):
-    return ICON_FONT if any(ord(c) > 127 for c in s) else "DejaVu Sans:style=Book"
+    return ICON_FONT if any(ord(c) > 127 and not c.isspace() for c in s) else "DejaVu Sans:style=Book"
 
 
 def legend_defs(units, legend, legend2, work, kid):
@@ -44,7 +44,7 @@ def legend_defs(units, legend, legend2, work, kid):
     for n, (key, text) in enumerate([("legend", legend), ("legend2", legend2)], 1):
         if not text:
             continue
-        size = 4 if len(text) == 1 and not legend2 else 3
+        size = 4 if (len(text) == 1 or text.startswith("@")) and not legend2 else 3
         font = font_for(text)
         probe = f"{work}/probe_{kid}_{n}.stl"
         render("probe", {**defs, "probe_line": n, f"{key}_size": size, f"{key}_font": font}, probe)

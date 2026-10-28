@@ -23,6 +23,9 @@ One file per key, named by row and key: `r3-f.3mf` is F. Row 0 is the Fn row.
 ### Dished, with homing bumps
 ![Dished, with homing bumps](docs/dished-bump.png)
 
+### Underside
+![Underside of F](docs/underside.png)
+
 ## Printing
 
 Each file has two parts: the cap and the legend. Give each its own filament.

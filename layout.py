@@ -25,14 +25,14 @@ KEYS = {
     "backslash": (1.5, "\\", "|"), "semicolon": (1, ";", ":"), "quote": (1, "'", "\""),
     "comma": (1, ",", "<"), "period": (1, ".", ">"), "slash": (1, "/", "?"),
     **{c: (1, c.upper(), "") for c in "abcdefghijklmnopqrstuvwxyz"},
-    "backspace": (2, "backspace", ""), "tab": (1.5, "tab", ""), "capslock": (1.75, "capslock", ""),
+    "backspace": (2, "backspace", ""), "tab": (1.5, "tab", ""), "capslock": (1.75, "caps\u200alock", ""),
     "enter": (2.25, "enter", ""), "lshift": (2.25, "shift", ""), "rshift": (1.75, "shift", ""),
     "pgup": (1, "pgup", ""), "pgdn": (1, "pgdn", ""), "home": (1, "home", ""), "end": (1, "end", ""),
     "lctrl": (1.25, "ctrl", ""), "option": (1.25, "option", ""), "lcmd": (1.25, "⌘", ""),
-    "lwin": (1.25, "win", ""), "lalt": (1.25, "alt", ""),
+    "lwin": (1.25, "@win", ""), "lalt": (1.25, "alt", ""),
     "space": (6.25, "", ""),
     "rcmd": (1, "⌘", ""), "ralt": (1, "alt", ""), "fn": (1, "fn", ""), "rctrl": (1, "ctrl", ""),
-    "up": (1, "⌃", ""), "left": (1, "‹", ""), "down": (1, "⌄", ""), "right": (1, "›", ""),
+    "up": (1, "@up", ""), "left": (1, "@left", ""), "down": (1, "@down", ""), "right": (1, "@right", ""),
 }
 
 FN_ROW = "esc f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 screenshot del light"

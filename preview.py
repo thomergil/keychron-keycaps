@@ -1,4 +1,4 @@
-"""Render the README images in docs/ from keys/: a top view per layout and one angled view.
+"""Render the README images in docs/ from keys/: a top view per layout, an angled view, and one cap from below.
 
   python preview.py
 Needs openscad (or $OPENSCAD) and, on a headless machine, xvfb-run.
@@ -30,7 +30,7 @@ def parts(path):
 
 
 def assemble(layout, variant, work):
-    """Write the whole keyboard as caps.stl and inlay.stl; return the scene .scad."""
+    """Write the whole keyboard as cap.stl and inlay.stl; return the scene .scad."""
     meshes = {"cap": [], "inlay": []}
     for r, row in enumerate(rows(layout)):
         x = 0
@@ -42,9 +42,20 @@ def assemble(layout, variant, work):
             x += u * PITCH
     for part, ms in meshes.items():
         trimesh.util.concatenate(ms).export(f"{work}/{part}.stl")
+    return write_scene(work)
+
+
+def single(kid, variant, work):
+    """Write one key as cap.stl and inlay.stl; return the scene .scad."""
+    for part, m in parts(f"{HERE}/keys/{variant}/r{ROW_OF[kid]}-{kid}.3mf").items():
+        m.export(f"{work}/{part}.stl")
+    return write_scene(work, "#a0a0a0")
+
+
+def write_scene(work, cap_color="#3a3a3a"):
     scad = f"{work}/scene.scad"
     with open(scad, "w") as f:
-        f.write('color("#3a3a3a") import("cap.stl");\ncolor("#f0f0f0") import("inlay.stl");\n')
+        f.write(f'color("{cap_color}") import("cap.stl");\ncolor("#f0f0f0") import("inlay.stl");\n')
     return scad
 
 
@@ -77,6 +88,9 @@ def main():
         shoot(assemble("QWERTY (macOS)", "dished-bump", work), f"{HERE}/docs/dished-bump.png",
               "2400,1100", "152.4,-52,0,50,0,0,330", False)
         print("docs/dished-bump.png")
+        shoot(single("f", "dished", work), f"{HERE}/docs/underside.png",
+              "1200,1000", "30,-38,-30,0,0,2.5", False)
+        print("docs/underside.png")
 
 
 if __name__ == "__main__":
